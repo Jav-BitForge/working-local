@@ -1,0 +1,70 @@
+# kong.yml.template
+
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: auth-service
+    url: http://${DOTNET_AUTH_SERVICE_IP}:5080
+    routes:
+      - name: auth
+        paths:
+          - /auth
+        strip_path: false
+
+  - name: payment-service
+    url: http://${DOTNET_PAYMENT_SERVICE_IP}:5090
+    routes:
+      - name: pagos
+        paths:
+          - /pagos
+        strip_path: false
+
+  - name: chat-service
+    url: http://${JAVA_SERVICE_CHAT_AI_IP}:5100
+    routes:
+      - name: chat
+        paths:
+          - /chat
+        strip_path: false
+
+  - name: panel-service
+    url: http://${JAVA_SERVICE_PANEL_IP}:5110
+    routes:
+      - name: panel
+        paths:
+          - /panel
+        strip_path: false
+
+  - name: test-service
+    url: http://${JAVA_SERVICE_TEST_IP}:5120
+    routes:
+      - name: test
+        paths:
+          - /test
+        strip_path: false
+
+  - name: universities-service
+    url: http://${JAVA_SERVICE_UNIVERSITIES_IP}:5130
+    routes:
+      - name: universidades
+        paths:
+          - /universidades
+        strip_path: false
+
+  - name: servicio-pagos
+    url: http://servicio-pagos:8083
+    routes:
+      - name: pagos-route
+        paths:
+          - /pagos/api
+        strip_path: true
+
+  - name: servicio-universidades
+    url: http://servicio-universidades:8082
+    routes:
+      - name: universidades-route
+        paths:
+          - /universidades/api
+        strip_path: true
+

@@ -1,0 +1,2 @@
+# Tell Cursor not to ignore .env files in this project
+!**/.env 

@@ -1,0 +1,29 @@
+services:
+  apigateway:
+    image: kong:3.6
+    container_name: apigateway
+    restart: unless-stopped
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /kong/declarative/kong.yml
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001
+      KONG_ADMIN_GUI_URL: http://localhost:8002
+      # No longer need service IP vars, they are hardcoded in kong.yml
+    ports:
+      - "8000:8000" # Proxy (entrada a los servicios)
+      - "8001:8001" # Admin API (curl, etc.)
+      - "8002:8002" # Kong Manager (UI web)
+    volumes:
+      - ./kong.yml:/kong/declarative/kong.yml
+    networks:
+      - kong-net
+      - app-network
+
+networks:
+  kong-net:
+  app-network:
+    external: true

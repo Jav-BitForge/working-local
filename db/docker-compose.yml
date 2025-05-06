@@ -1,0 +1,37 @@
+services:
+  db_postgres:
+    container_name: bd_post
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: bitforge
+      POSTGRES_USER: bitforge_bd
+      POSTGRES_PASSWORD: 313kfA?1X(W
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "pg_isready",
+          "-U",
+          "bitforge_bd",
+          "-d",
+          "bitforge",
+          "-h",
+          "localhost",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - app-network
+volumes:
+  pgdata:
+
+networks:
+  app-network:
+    external: true

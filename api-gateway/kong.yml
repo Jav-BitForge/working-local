@@ -1,0 +1,70 @@
+# kong.yml.template
+
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: auth-service
+    url: http://servicio-autenticacion:5080
+    routes:
+      - name: auth
+        paths:
+          - /auth
+        strip_path: false
+
+  - name: payment-service
+    url: http://servicio-pagos:5090
+    routes:
+      - name: pagos
+        paths:
+          - /pagos
+        strip_path: false
+
+  - name: chat-service
+    url: http://servicio-chat-ai:5100
+    routes:
+      - name: chat
+        paths:
+          - /chat
+        strip_path: false
+
+  - name: panel-service
+    url: http://servicio-panel:5110
+    routes:
+      - name: panel
+        paths:
+          - /panel
+        strip_path: false
+
+  - name: test-service
+    url: http://servicio-test:5120
+    routes:
+      - name: test
+        paths:
+          - /test
+        strip_path: false
+
+  - name: universities-service
+    url: http://servicio-universidades:5130
+    routes:
+      - name: universidades
+        paths:
+          - /universidades
+        strip_path: false
+
+  - name: servicio-pagos
+    url: http://servicio-pagos:8083
+    routes:
+      - name: pagos-route
+        paths:
+          - /pagos/api
+        strip_path: true
+
+  - name: servicio-universidades
+    url: http://servicio-universidades:8082
+    routes:
+      - name: universidades-route
+        paths:
+          - /universidades/api
+        strip_path: true
+

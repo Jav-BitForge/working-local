@@ -1,0 +1,37 @@
+name: Deploy Producción Apigateway 
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: apigateway-prod
+    steps:
+      - name: Clonar el código
+        uses: actions/checkout@v4
+
+      - name: Validar existencia del archivo .env
+        run: test -f /home/estudiante/Desktop/.env || (echo "Archivo .env no encontrado" && exit 1)
+
+      - name: Restaurar archivo .env
+        run: cp /home/estudiante/Desktop/.env /home/estudiante/Desktop/actions-runner-apigateway/_work/Api-Gateway/Api-Gateway/.env
+
+      - name: Limpiar caracteres de Windows (\r)
+        run: |
+          sed -i 's/\r$//' generar-kong.sh
+          sed -i 's/\r$//' .env
+          sed -i 's/\r$//' kong.yml.template
+
+      - name: Generar archivo kong.yml desde plantilla
+        run: |
+          cd /home/estudiante/Desktop/actions-runner-apigateway/_work/Api-Gateway/Api-Gateway
+          chmod +x generar-kong.sh
+          ./generar-kong.sh
+
+      - name: Actualizar Apigateway en Produccion
+        run: |
+          cd /home/estudiante/Desktop/actions-runner-apigateway/_work/Api-Gateway/Api-Gateway
+          docker-compose down --remove-orphans
+          docker-compose up --force-recreate --detach apigateway
