@@ -29,8 +29,10 @@ DIRECTORIES=(
 
 for dir in "${DIRECTORIES[@]}"; do
     echo "Starting services in $dir..."
-    # Use local compose file if it's servicio-test, Front-End, servicio-auth, servicio-pagos, or servicio-universidades
-    if [ "$dir" == "servicio-test" ] || [ "$dir" == "Front-End" ] || [ "$dir" == "servicio-auth" ] || [ "$dir" == "servicio-pagos" ] || [ "$dir" == "servicio-universidades" ]; then
+    if [ "$dir" == "Front-End" ]; then
+        echo "Performing full down, no-cache build, and up for Front-End..."
+        (cd "$BASE_DIR/$dir" && docker-compose -f docker-compose.local.yml down && docker-compose -f docker-compose.local.yml build --no-cache && docker-compose -f docker-compose.local.yml up -d) || echo "Failed to start services in $dir using local config with no-cache, continuing..."
+    elif [ "$dir" == "servicio-test" ] || [ "$dir" == "servicio-auth" ] || [ "$dir" == "servicio-pagos" ] || [ "$dir" == "servicio-universidades" ]; then
         (cd "$BASE_DIR/$dir" && docker-compose -f docker-compose.local.yml up -d --build) || echo "Failed to start services in $dir using local config, continuing..."
     else
     (cd "$BASE_DIR/$dir" && docker-compose up -d --build) || echo "Failed to start services in $dir, continuing..."
