@@ -7,7 +7,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: bitforge_db
+      POSTGRES_DB: bitforge
       POSTGRES_USER: bitforge_bd
       POSTGRES_PASSWORD: 313kfA?1X(W # Consider moving to .env if not already there for local
     volumes:
