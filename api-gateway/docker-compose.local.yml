@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  apigateway:
+    container_name: apigateway
+    image: kong:3.6
+    ports:
+      - "8080:8000"
+      - "8443:8443"
+      - "8001:8001"
+      - "8444:8444"
+    env_file:
+      - .env
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: "/usr/local/kong/declarative/kong.yml"
+      KONG_PROXY_LISTEN: "0.0.0.0:8000, 0.0.0.0:8443 ssl"
+      KONG_ADMIN_LISTEN: "0.0.0.0:8001, 0.0.0.0:8444 ssl"
+      KONG_PROXY_ACCESS_LOG: "/dev/stdout"
+      KONG_ADMIN_ACCESS_LOG: "/dev/stdout"
+      KONG_PROXY_ERROR_LOG: "/dev/stderr"
+      KONG_ADMIN_ERROR_LOG: "/dev/stderr"
+      KONG_PLUGINS: "bundled"
+      DOTNET_AUTH_SERVICE_IP: "${DOTNET_AUTH_SERVICE_IP}"
+      DOTNET_PAYMENT_SERVICE_IP: "${DOTNET_PAYMENT_SERVICE_IP}"
+      JAVA_SERVICE_CHAT_AI_IP: "${JAVA_SERVICE_CHAT_AI_IP}"
+      JAVA_SERVICE_PANEL_IP: "${JAVA_SERVICE_PANEL_IP}"
+      JAVA_SERVICE_TEST_IP: "${JAVA_SERVICE_TEST_IP}"
+      JAVA_SERVICE_UNIVERSITIES_IP: "${JAVA_SERVICE_UNIVERSITIES_IP}"
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml:ro
+    healthcheck:
+      test: ["CMD", "kong", "health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: always
+    networks:
+      - dev-network
+
+networks:
+  dev-network:
+    name: dev-network
+    driver: bridge

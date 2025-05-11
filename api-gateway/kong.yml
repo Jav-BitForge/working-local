@@ -61,10 +61,9 @@ services:
         strip_path: true
 
   - name: servicio-universidades
-    url: http://servicio-universidades:8082
+    url: http://servicio-universidades:5130
     routes:
       - name: universidades-route
         paths:
           - /universidades/api
         strip_path: true
-

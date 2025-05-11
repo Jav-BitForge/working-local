@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  db_postgres: # Matching service name from original docker-compose.yml
+    container_name: bd_post # Crucial for other services to find it
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: bitforge_db
+      POSTGRES_USER: bitforge_bd
+      POSTGRES_PASSWORD: 313kfA?1X(W # Consider moving to .env if not already there for local
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    healthcheck:
+      test: [
+          "CMD",
+          "pg_isready",
+          "-U",
+          "bitforge_bd",
+          "-d",
+          "bitforge",
+          "-h",
+          "localhost", # Healthcheck can use localhost as it runs inside the container
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - dev-network
+
+volumes:
+  pgdata: # Define the volume locally
+
+networks:
+  dev-network:
+    name: dev-network
+    driver: bridge

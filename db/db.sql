@@ -242,15 +242,14 @@ CREATE TABLE InformacionDemografica(
 );
 
 CREATE TABLE CalificacionesColegio(
-  id SERIAL PRIMARY KEY,
-  matematicas NUMERIC(3,1) NULL,
-  espaniol NUMERIC(3,1) NULL,
-  ingles NUMERIC(3,1) NULL,
-  biologia NUMERIC(3,1) NULL,
-  quimica NUMERIC(3,1) NULL,
-  fisica NUMERIC(3,1) NULL
+	id SERIAL PRIMARY KEY,
+	matematicas NUMERIC(5,2) NULL,
+	espaniol NUMERIC(5,2) NULL,
+	ingles NUMERIC(5,2) NULL,
+	biologia NUMERIC(5,2) NULL,
+	quimica NUMERIC(5,2) NULL,
+	fisica NUMERIC(5,2) NULL
 );
-
 
 CREATE TABLE InformacionFinanciera(
 	id SERIAL PRIMARY KEY,
@@ -358,9 +357,9 @@ VALUES
 -- CuentaUsuario
 INSERT INTO cuentausuario (id, authid, tipoUsuario, nombre, numeroDocumento, tipoDocumento, correo, telefono, contrasenia, premium, fechaRegistro)
 VALUES 
-(201, 'auth0|u201', 'estudiante', 'Laura Ruiz', '1001', 'CC', 'laura.ruiz@gmail.com', '3000001001', 'pass', FALSE, CURRENT_DATE),
-(202, 'auth0|u202', 'estudiante', 'Carlos Díaz', '1002', 'CC', 'carlos.diaz@gmail.com', '3000001002', 'pass', FALSE, CURRENT_DATE),
-(203, 'auth0|u203', 'estudiante', 'Ana López', '1003', 'CC', 'ana.lopez@gmail.com', '3000001003', 'pass', FALSE, CURRENT_DATE),
+(201, 'auth0|u201', 'estudiante', 'Laura Ruiz', '1001', 'CC', 'laura.ruiz@gmail.com', '3000001001', 'pass', TRUE, CURRENT_DATE),
+(202, 'auth0|u202', 'estudiante', 'Carlos Díaz', '1002', 'CC', 'carlos.diaz@gmail.com', '3000001002', 'pass', TRUE, CURRENT_DATE),
+(203, 'auth0|u203', 'estudiante', 'Ana López', '1003', 'CC', 'ana.lopez@gmail.com', '3000001003', 'pass', TRUE, CURRENT_DATE),
 (204, 'auth0|u204', 'estudiante', 'Pedro Gómez', '1004', 'CC', 'pedro.gomez@gmail.com', '3000001004', 'pass', FALSE, CURRENT_DATE),
 (205, 'auth0|u205', 'estudiante', 'Valentina Mora', '1005', 'CC', 'valentina.mora@gmail.com', '3000001005', 'pass', FALSE, CURRENT_DATE),
 (206, 'auth0|u206', 'estudiante', 'David Acosta', '1006', 'CC', 'david.acosta@gmail.com', '3000001006', 'pass', FALSE, CURRENT_DATE),
@@ -390,15 +389,15 @@ INSERT INTO cuentausuario (idcuentaprincipal, tipousuario, authid, nombre, numer
 (NULL, 'tutor', 'auth0|6819714de9675da79f8ebd9f', 'Rodolfo Neiza', '1200000', 'CC', 'rodolfo@gmail.com', '3195524765', 'Bb1234567%', false, '2025-05-06'),
 (NULL, 'tutor', 'auth0|6819726e6e369b7c2f351235', 'Andrea Perez', '1300000', 'CC', 'andrea@gmail.com', '3195524765', 'Bb1234567%', true, '2025-05-06'),
 (NULL, 'tutor', 'auth0|6819731aa209515eca92d9c6', 'Rachel Castro', '1400000', 'CC', 'rachel@gmail.com', '3195524765', 'Bb1234567%', true, '2025-05-06'),
-(NULL, 'representante', 'auth0|68197553fdcd91ba478f6cbd', 'Tony Gonzalez', '110100', 'CC', 'tony@gmail.com', '3195524765', 'Cc1234567%', false, '2025-05-06'),
-(NULL, 'representante', 'auth0|681975d1a673eaa99f060567', 'Toni Gonzalez', '110100', 'CC', 'toni@gmail.com', '3195524765', 'Cc1234567%', false, '2025-05-06'),
-(NULL, 'representante', 'auth0|681975f7a209515eca92db75', 'Antonio Gonzalez', '110100', 'CC', 'antonio@gmail.com', '3195524765', 'Cc1234567%', false, '2025-05-06'),
-(NULL, 'representante', 'auth0|68198978190169e0099e2f43', 'Sergio Perez', '110200', 'CC', 'sergio@gmail.com', '3195524765', 'Cc1234567%', false, '2025-05-06'),
-(NULL, 'representante', 'auth0|68198a27fdcd91ba478f7890', 'Sergio Cortez', '110300', 'CC', 'sofia@gmail.com', '3195524765', 'Cc1234567%', false, '2025-05-06'),
+(NULL, 'tutor', 'auth0|68197553fdcd91ba478f6cbd', 'Tony Gonzalez', '110100', 'CC', 'tony@gmail.com', '3195524765', 'Cc1234567%', false, '2025-05-06'),
+(NULL, 'tutor', 'auth0|681975d1a673eaa99f060567', 'Toni Gonzalez', '110100', 'CC', 'toni@gmail.com', '3195524765', 'Cc1234567%', false, '2025-05-06'),
+(NULL, 'admin_financiero', 'auth0|681975f7a209515eca92db75', 'Antonio Gonzalez', '110100', 'CC', 'antonio@gmail.com', '3195524765', 'Cc1234567%', false, '2025-05-06'),
+(NULL, 'admin', 'auth0|68198978190169e0099e2f43', 'Sergio Perez', '110200', 'CC', 'sergio@gmail.com', '3195524765', 'Cc1234567%', false, '2025-05-06'),
+(NULL, 'admin_soporte', 'auth0|68198a27fdcd91ba478f7890', 'Sergio Cortez', '110300', 'CC', 'sofia@gmail.com', '3195524765', 'Cc1234567%', false, '2025-05-06'),
 (NULL, 'admin', 'auth0|68196ee7decce84ad47f6666', 'Andres', '1000000', 'CC', 'admingeneral@gmail.com', '3124563765', 'Aa1234567%', false, '2025-05-06'),
 (NULL, 'admin_soporte', 'auth0|68196f1e6e369b7c2f35105c', 'Adriana', '1000001', 'CC', 'adminsoporte@gmail.com', '3124563765', 'Aa1234567%', false, '2025-05-06'),
-(NULL, 'representante', 'auth0|68198bf68069a1d92430184d', 'Karen Cortez', '110400', 'CC', 'karen@gmail.com', '321435421', 'Cc1234567%', true, '2025-05-06'),
-(NULL, 'representante', 'auth0|68198c4c190169e0099e30d2', 'Diego Gomez', '110500', 'CC', 'diegog@gmail.com', '324654121', 'Cc1234567%', true, '2025-05-06');
+(NULL, 'estudiante', 'auth0|68198bf68069a1d92430184d', 'Karen Cortez', '110400', 'CC', 'karen@gmail.com', '321435421', 'Cc1234567%', true, '2025-05-06'),
+(NULL, 'estudiante', 'auth0|68198c4c190169e0099e30d2', 'Diego Gomez', '110500', 'CC', 'diegog@gmail.com', '324654121', 'Cc1234567%', true, '2025-05-06');
 
 INSERT INTO cuentaagente (iduniversidad, authid, nombre, numerodocumento, tipodocumento, correo, contrasenia, premium, fecharegistro) VALUES
 (NULL, 'auth0|6819894910ae615fc72f0a68', 'Antonio Gonzalez', '110100', 'CC', 'antonio@gmail.com', 'Cc1234567%', false, '2025-05-06'),
