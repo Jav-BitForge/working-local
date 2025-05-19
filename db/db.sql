@@ -238,7 +238,9 @@ CREATE TABLE InformacionDemografica(
 	genero VARCHAR(255) NULL,
 	ciudadResidencia VARCHAR(255) NULL,
 	paisResidencia VARCHAR(255) NULL,
-	ingresosMensuales DOUBLE PRECISION NULL
+	ingresosMensuales DOUBLE PRECISION NULL,
+	puedeDesplazarse BOOLEAN NULL,
+	estrato VARCHAR(255) NULL
 );
 
 CREATE TABLE CalificacionesColegio(
@@ -403,5 +405,4 @@ INSERT INTO cuentaagente (iduniversidad, authid, nombre, numerodocumento, tipodo
 (NULL, 'auth0|6819894910ae615fc72f0a68', 'Antonio Gonzalez', '110100', 'CC', 'antonio@gmail.com', 'Cc1234567%', false, '2025-05-06'),
 (NULL, 'auth0|68198978190169e0099e2f43', 'Sergio Perez', '110200', 'CC', 'sergio@gmail.com', 'Cc1234567%', false, '2025-05-06'),
 (NULL, 'auth0|68198a27fdcd91ba478f7890', 'Sergio Cortez', '110300', 'CC', 'sofia@gmail.com', 'Cc1234567%', true, '2025-05-06'),
-(NULL, 'auth0|68198bf68069a1d92430184d', 'Karen Cortez', '110400', 'CC', 'karen@gmail.com', 'Cc1234567%', true, '2025-05-06'),
 (NULL, 'auth0|68198c4c190169e0099e30d2', 'Diego Gomez', '110500', 'CC', 'diegog@gmail.com', 'Cc1234567%', true, '2025-05-06');
